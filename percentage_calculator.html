@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Change Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+        .calculator {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            width: 350px;
+            text-align: center;
+        }
+        .calculator h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #fff;
+        }
+        .calculator label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #2575fc;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .calculator button:hover {
+            background: #6a11cb;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Percentage Change Calculator</h2>
+        <label for="old-value">Old Value:</label>
+        <input type="number" id="old-value" placeholder="Enter old value" />
+
+        <label for="new-value">New Value:</label>
+        <input type="number" id="new-value" placeholder="Enter new value" />
+
+        <button onclick="calculateChange()">Calculate</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateChange() {
+            const oldValue = parseFloat(document.getElementById('old-value').value);
+            const newValue = parseFloat(document.getElementById('new-value').value);
+            const resultElement = document.getElementById('result');
+
+            // Debugging: Log input values
+            console.log("Old Value:", oldValue);
+            console.log("New Value:", newValue);
+
+            // Check for valid inputs
+            if (isNaN(oldValue) || isNaN(newValue) || oldValue === 0) {
+                resultElement.textContent = "Please enter valid numbers (Old Value cannot be zero).";
+                return;
+            }
+
+            // Calculate percentage change
+            const change = ((newValue - oldValue) / oldValue) * 100;
+            const roundedChange = change.toFixed(2);
+
+            // Display result
+            if (change > 0) {
+                resultElement.textContent = `Increase: ${roundedChange}%`;
+            } else if (change < 0) {
+                resultElement.textContent = `Decrease: ${roundedChange}%`;
+            } else {
+                resultElement.textContent = "No change.";
+            }
+        }
+    </script>
+</body>
+</html>
